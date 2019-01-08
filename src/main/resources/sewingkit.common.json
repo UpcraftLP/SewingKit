@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.blamejared.sewingkit.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "RecipeMixin",
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

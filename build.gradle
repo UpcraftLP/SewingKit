@@ -1,0 +1,29 @@
+plugins {
+    id 'fabric-loom' version '0.2.0-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+archivesBaseName = "SewingKit"
+version = "1.0.0"
+
+minecraft {
+}
+
+
+repositories {
+    maven {
+        url "http://maven.blamejared.com"
+    }
+}
+dependencies {
+    minecraft "com.mojang:minecraft:18w50a"
+    mappings "net.fabricmc:yarn:18w50a.91"
+    modCompile "net.fabricmc:fabric-loader:0.3.2.91"
+    modCompile "net.fabricmc:fabric:0.1.4.69"
+
+    compile group: 'net.sf.trove4j', name: 'trove4j', version: '3.0.3'
+
+    compile fileTree(dir: "libs", includes: ['*.jar'])
+}

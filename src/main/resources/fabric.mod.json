@@ -1,0 +1,12 @@
+{
+  "id": "sewingkit",
+  "name": "Sewing Kit",
+  "version": "1.0.0",
+  "side": "universal",
+  "initializer": "com.blamejared.sewingkit.SewingKit",
+  "mixins": {
+    "client": "sewingkit.client.json",
+    "common": "sewingkit.common.json",
+    "server": "sewingkit.server.json"
+  }
+}
