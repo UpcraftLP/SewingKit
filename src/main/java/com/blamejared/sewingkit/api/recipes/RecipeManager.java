@@ -17,7 +17,7 @@ public class RecipeManager implements ZenCodeType {
     public List<Recipe> recipeListAddition = new ArrayList<>();
     public List<Identifier> recipeListRemoval = new ArrayList<>();
     
-    public Map<Identifier, Recipe> recipeMap;
+    public Map<RecipeType<?> , Map<Identifier, Recipe<?>>> recipeMap;
     
     
     @ZenCodeType.Method
@@ -51,7 +51,7 @@ public class RecipeManager implements ZenCodeType {
     
     @ZenCodeType.Method
     public void removeRecipe(MCItemStack stack) {
-        for(Map.Entry<Identifier, Recipe> entry : recipeMap.entrySet()) {
+        for(Map.Entry<Identifier, Recipe<?>> entry : recipeMap.get(RecipeType.CRAFTING).entrySet()) {
             if(ItemStack.areEqual(entry.getValue().getOutput(), stack.getStack())) {
                 recipeListRemoval.add(entry.getKey());
             }
