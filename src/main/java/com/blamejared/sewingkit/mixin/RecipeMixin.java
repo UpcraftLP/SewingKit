@@ -25,7 +25,7 @@ public abstract class RecipeMixin {
     @Final
     private Map<Identifier, Recipe> recipeMap;
     
-    @Inject(at = @At("TAIL"), method = "onResourceReload")
+    @Inject(at = @At("TAIL"), method = "apply")
     private void run(CallbackInfo info) {
         List<Class> list = SKApi.locate(false);
         

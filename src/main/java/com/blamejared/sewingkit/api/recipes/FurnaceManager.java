@@ -3,8 +3,9 @@ package com.blamejared.sewingkit.api.recipes;
 import com.blamejared.sewingkit.api.SKApi;
 import com.blamejared.sewingkit.api.item.MCItemStack;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.*;
-import net.minecraft.recipe.smelting.SmeltingRecipe;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.cooking.SmeltingRecipe;
 import net.minecraft.util.Identifier;
 import org.openzen.zencode.java.ZenCodeType;
 

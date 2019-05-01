@@ -2,7 +2,7 @@ package com.blamejared.sewingkit;
 
 import com.blamejared.sewingkit.api.SKApi;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.commands.CommandRegistry;
+import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.recipe.Recipe;
 
@@ -17,7 +17,7 @@ public class SewingKit implements ModInitializer {
     
     @Override
     public void onInitialize() {
-        CommandRegistry.INSTANCE.register(false, serverCommandSourceCommandDispatcher -> CommandHand.register(serverCommandSourceCommandDispatcher));
+        CommandRegistry.INSTANCE.register(false, CommandHand::register);
     
     }
 }

@@ -3,7 +3,7 @@ package com.blamejared.sewingkit.api.item;
 import com.blamejared.sewingkit.api.SKApi;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sortme.JsonLikeTagParser;
+import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.util.registry.Registry;
 import org.openzen.zencode.java.ZenCodeType;
 
@@ -37,7 +37,7 @@ public class MCItemStack implements ZenCodeType {
     public MCItemStack withTag(String tag) {
         ItemStack copy = stack.copy();
         try {
-            copy.setTag(JsonLikeTagParser.parse(tag));
+            copy.setTag(StringNbtReader.parse(tag));
         } catch(CommandSyntaxException e) {
             SKApi.logger.logError(e.getMessage());
         }
