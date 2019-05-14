@@ -14,17 +14,6 @@
     ]
   },
   "mixins": [
-    {
-      "environemnt": "*",
-      "config": "mixins.sewingkit.common.json"
-    },
-    {
-      "environemnt": "client",
-      "config": "mixins.sewingkit.client.json"
-    },
-    {
-      "environemnt": "server",
-      "config": "mixins.sewingkit.server.json"
-    }
+      "mixins.sewingkit.json"
   ]
 }
