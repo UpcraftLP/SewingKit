@@ -15,7 +15,7 @@ public class ItemManager implements ZenCodeType {
     
     public static void rebuild() {
         items.clear();
-        for(Identifier key : Registry.ITEM.keys()) {
+        for(Identifier key : Registry.ITEM.getIds()) {
             Item item = Registry.ITEM.get(key);
             items.put(key.toString(), new MCItemStack(new ItemStack(item)));
         }

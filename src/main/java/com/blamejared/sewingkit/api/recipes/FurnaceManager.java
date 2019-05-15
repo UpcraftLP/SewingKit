@@ -3,8 +3,10 @@ package com.blamejared.sewingkit.api.recipes;
 import com.blamejared.sewingkit.api.SKApi;
 import com.blamejared.sewingkit.api.item.MCItemStack;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.*;
-import net.minecraft.recipe.smelting.SmeltingRecipe;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.cooking.SmeltingRecipe;
 import net.minecraft.util.Identifier;
 import org.openzen.zencode.java.ZenCodeType;
 
@@ -30,7 +32,7 @@ public class FurnaceManager implements ZenCodeType {
     
     @Method
     public void removeRecipe(MCItemStack stack) {
-        for(Map.Entry<Identifier, Recipe> entry : SKApi.recipes.recipeMap.entrySet()) {
+        for(Map.Entry<Identifier, Recipe<?>> entry : SKApi.recipes.recipeMap.get(RecipeType.SMELTING).entrySet()) {
             if(ItemStack.areEqual(entry.getValue().getOutput(), stack.getStack())) {
                 recipeListRemoval.add(entry.getKey());
             }

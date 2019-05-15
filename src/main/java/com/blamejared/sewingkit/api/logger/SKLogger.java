@@ -4,12 +4,13 @@ package com.blamejared.sewingkit.api.logger;
 import org.openzen.zencode.java.ZenCodeType;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 
 @ZenCodeType.Name("sk.Logger")
 public class SKLogger implements ZenCodeType {
     
-    private static final Pattern FORMATTING_CODE_PATTERN = Pattern.compile("(?i)" + String.valueOf('\u00a7') + "[0-9A-FK-OR]");
+    private static final Pattern FORMATTING_CODE_PATTERN = Pattern.compile("(?i)" + '\u00a7' + "[0-9A-FK-OR]");
     private final Writer writer;
     private final PrintWriter printWriter;
     private boolean isDefaultDisabled = false;
@@ -17,11 +18,10 @@ public class SKLogger implements ZenCodeType {
     public SKLogger(File output) {
         try {
             System.out.println(output.getAbsolutePath());
-            writer = new OutputStreamWriter(new FileOutputStream(output), "utf-8");
+            writer = new OutputStreamWriter(new FileOutputStream(output), StandardCharsets.UTF_8);
             printWriter = new PrintWriter(writer);
-        } catch(UnsupportedEncodingException ex) {
-            throw new RuntimeException("What the heck?");
-        } catch(FileNotFoundException ex) {
+        }
+        catch(FileNotFoundException ex) {
             throw new RuntimeException("Could not open log file " + output);
         }
     }

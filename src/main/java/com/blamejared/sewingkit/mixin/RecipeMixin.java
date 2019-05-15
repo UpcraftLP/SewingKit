@@ -23,9 +23,9 @@ public abstract class RecipeMixin {
     
     @Shadow
     @Final
-    private Map<Identifier, Recipe> recipeMap;
+    private Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipeMap;
     
-    @Inject(at = @At("TAIL"), method = "onResourceReload")
+    @Inject(at = @At("TAIL"), method = "apply")
     private void run(CallbackInfo info) {
         List<Class> list = SKApi.locate(false);
         
@@ -85,19 +85,19 @@ public abstract class RecipeMixin {
             e.printStackTrace();
         }
         
-        for(Recipe recipe : SKApi.recipes.recipeListAddition) {
-            recipeMap.put(recipe.getId(), recipe);
+        for(Recipe<?> recipe : SKApi.recipes.recipeListAddition) {
+            recipeMap.get(RecipeType.CRAFTING).put(recipe.getId(), recipe);
         }
         for(Identifier identifier : SKApi.recipes.recipeListRemoval) {
-            recipeMap.remove(identifier);
+            recipeMap.get(RecipeType.CRAFTING).remove(identifier);
         }
     
     
-        for(Recipe recipe : SKApi.furnaceManager.recipeListAddition) {
-            recipeMap.put(recipe.getId(), recipe);
+        for(Recipe<?> recipe : SKApi.furnaceManager.recipeListAddition) {
+            recipeMap.get(RecipeType.SMELTING).put(recipe.getId(), recipe);
         }
         for(Identifier identifier : SKApi.furnaceManager.recipeListRemoval) {
-            recipeMap.remove(identifier);
+            recipeMap.get(RecipeType.SMELTING).remove(identifier);
         }
     }
     
