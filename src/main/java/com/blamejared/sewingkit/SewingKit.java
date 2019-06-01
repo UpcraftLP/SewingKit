@@ -18,6 +18,6 @@ public class SewingKit implements ModInitializer {
     @Override
     public void onInitialize() {
         CommandRegistry.INSTANCE.register(false, CommandHand::register);
-    
+        
     }
 }

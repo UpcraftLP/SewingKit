@@ -1,14 +1,16 @@
 package com.blamejared.sewingkit.api.item;
 
 import com.blamejared.sewingkit.api.SKApi;
+import com.blamejared.sewingkit.api.ingredients.IIngredient;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.StringNbtReader;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.registry.Registry;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenCodeType.Name("sk.Itemstack")
-public class MCItemStack implements ZenCodeType {
+public class MCItemStack implements ZenCodeType, IIngredient {
     
     private ItemStack stack;
     
@@ -78,4 +80,16 @@ public class MCItemStack implements ZenCodeType {
         
         return stringbuilder.toString();
     }
+    
+    @Override
+    public Ingredient asIngredient() {
+        return Ingredient.ofStacks(getStack());
+    }
+    
+    @ZenCodeType.Caster(implicit = true)
+    public IIngredient asIIngredient() {
+        return this;
+    }
+    
+    
 }

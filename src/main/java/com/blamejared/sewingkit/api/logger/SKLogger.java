@@ -17,7 +17,6 @@ public class SKLogger implements ZenCodeType {
     
     public SKLogger(File output) {
         try {
-            System.out.println(output.getAbsolutePath());
             writer = new OutputStreamWriter(new FileOutputStream(output), StandardCharsets.UTF_8);
             printWriter = new PrintWriter(writer);
         }

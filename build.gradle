@@ -17,6 +17,10 @@ repositories {
     maven {
         url "http://maven.blamejared.com"
     }
+
+    maven {
+        url "https://maven.openzen.org/"
+    }
 }
 
 configurations {
@@ -37,6 +41,8 @@ dependencies {
 
     compile fileTree(dir: "libs", includes: ['*.jar'], excludes: ['*-sources.jar'])
     embed fileTree(dir: "libs", includes: ['*.jar'], excludes: ['*-sources.jar'])
+//    compile 'org.openzen.zencode:zencode-javascripting:0.3.8'
+//    embed 'org.openzen.zencode:zencode-javascripting:0.3.8'
 }
 
 shadowJar {

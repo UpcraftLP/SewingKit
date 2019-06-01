@@ -7,7 +7,7 @@ import org.openzen.zencode.java.ZenCodeType;
 
 import java.util.*;
 
-@ZenCodeType.Name("sk.Itemstack")
+@ZenCodeType.Name("sk.ItemManager")
 public class ItemManager implements ZenCodeType {
     
     
@@ -28,4 +28,5 @@ public class ItemManager implements ZenCodeType {
         }
         return null;
     }
+    
 }

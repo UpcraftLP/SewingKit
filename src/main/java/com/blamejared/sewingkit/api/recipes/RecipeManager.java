@@ -1,6 +1,7 @@
 package com.blamejared.sewingkit.api.recipes;
 
 import com.blamejared.sewingkit.api.SKApi;
+import com.blamejared.sewingkit.api.ingredients.IIngredient;
 import com.blamejared.sewingkit.api.item.MCItemStack;
 import com.blamejared.sewingkit.api.utils.ItemStackUtils;
 import net.minecraft.item.ItemStack;
@@ -12,21 +13,16 @@ import org.openzen.zencode.java.ZenCodeType;
 import java.util.*;
 
 @ZenCodeType.Name("sk.RecipeManager")
-public class RecipeManager implements ZenCodeType {
-    
-    
-    public List<Recipe> recipeListAddition = new ArrayList<>();
-    public List<Identifier> recipeListRemoval = new ArrayList<>();
-    
-    public Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipeMap;
+public class RecipeManager extends RecipeManagerBase implements ZenCodeType {
     
     
     @ZenCodeType.Method
-    public void addShapelessRecipe(String name, MCItemStack output, MCItemStack... inputs) {
+    public void addShapelessRecipe(String name, MCItemStack output, IIngredient... inputs) {
         DefaultedList<Ingredient> list = DefaultedList.create();
         
-        for(ItemStack input : ItemStackUtils.getItemStack(inputs)) {
-            list.add(Ingredient.ofStacks(input));
+        
+        for(IIngredient input : inputs) {
+            list.add(input.asIngredient());
         }
         SKApi.logger.logInfo("Adding recipe: " + name + " output: " + output + " inputs: " + Arrays.toString(inputs));
         recipeListAddition.add(new ShapelessRecipe(new Identifier("sewingkit", name), "", output.getStack(), list));
@@ -34,11 +30,11 @@ public class RecipeManager implements ZenCodeType {
     
     
     @ZenCodeType.Method
-    public void addShapedRecipe(String name, MCItemStack output, MCItemStack[][] inputs) {
+    public void addShapedRecipe(String name, MCItemStack output, IIngredient[][] inputs) {
         DefaultedList<Ingredient> list = DefaultedList.create();
-        for(MCItemStack[] in : inputs) {
-            for(ItemStack stack : ItemStackUtils.getItemStack(in)) {
-                list.add(Ingredient.ofStacks(stack));
+        for(IIngredient[] input : inputs) {
+            for(IIngredient ingredient : input) {
+                list.add(ingredient.asIngredient());
             }
         }
         SKApi.logger.logInfo("Adding Shaped recipe: " + name + " output: " + output);
@@ -53,7 +49,7 @@ public class RecipeManager implements ZenCodeType {
     
     @ZenCodeType.Method
     public void removeRecipe(MCItemStack stack) {
-        for(Map.Entry<Identifier, Recipe<?>> entry : recipeMap.get(RecipeType.CRAFTING).entrySet()) {
+        for(Map.Entry<Identifier, Recipe<?>> entry : RecipeManagerBase.recipeMap.get(getType()).entrySet()) {
             if(ItemStack.areEqual(entry.getValue().getOutput(), ItemStackUtils.getItemStack(stack))) {
                 recipeListRemoval.add(entry.getKey());
             }
@@ -61,5 +57,9 @@ public class RecipeManager implements ZenCodeType {
         
     }
     
+    @Override
+    public RecipeType getType() {
+        return RecipeType.CRAFTING;
+    }
     
 }

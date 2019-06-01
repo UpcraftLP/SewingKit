@@ -6,19 +6,18 @@ import com.blamejared.sewingkit.api.item.MCItemStack;
 import com.blamejared.sewingkit.api.utils.ItemStackUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.cooking.SmeltingRecipe;
 import net.minecraft.util.Identifier;
 import org.openzen.zencode.java.ZenCodeType;
 
-import java.util.*;
+import java.util.Map;
 
-@ZenCodeType.Name("sk.FurnaceManager")
-public class FurnaceManager extends RecipeManagerBase implements ZenCodeType {
+@ZenCodeType.Name("sk.StoneCuttingManager")
+public class StoneCuttingManager extends RecipeManagerBase implements ZenCodeType {
     
     @Method
-    public void addRecipe(String name, MCItemStack output, IIngredient inputs, float xp, int cookTime) {
-        SKApi.logger.logInfo("Adding furnace recipe: " + name + " output: " + output + " inputs: " + inputs);
-        recipeListAddition.add(new SmeltingRecipe(new Identifier("sewingkit", name), "", inputs.asIngredient(), ItemStackUtils.getItemStack(output), xp, cookTime));
+    public void addRecipe(String name, MCItemStack output, IIngredient inputs) {
+        SKApi.logger.logInfo("Adding stone cutting recipe: " + name + " output: " + output + " inputs: " + inputs);
+        recipeListAddition.add(new StonecuttingRecipe(new Identifier("sewingkit", name), "", inputs.asIngredient(), ItemStackUtils.getItemStack(output)));
     }
     
     @Method
@@ -38,6 +37,6 @@ public class FurnaceManager extends RecipeManagerBase implements ZenCodeType {
     
     @Override
     public RecipeType getType() {
-        return RecipeType.SMELTING;
+        return RecipeType.STONECUTTING;
     }
 }

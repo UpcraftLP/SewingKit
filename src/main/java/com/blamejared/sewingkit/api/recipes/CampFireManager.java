@@ -6,19 +6,19 @@ import com.blamejared.sewingkit.api.item.MCItemStack;
 import com.blamejared.sewingkit.api.utils.ItemStackUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.cooking.SmeltingRecipe;
+import net.minecraft.recipe.cooking.*;
 import net.minecraft.util.Identifier;
 import org.openzen.zencode.java.ZenCodeType;
 
-import java.util.*;
+import java.util.Map;
 
-@ZenCodeType.Name("sk.FurnaceManager")
-public class FurnaceManager extends RecipeManagerBase implements ZenCodeType {
+@ZenCodeType.Name("sk.CampFireManager")
+public class CampFireManager extends RecipeManagerBase implements ZenCodeType {
     
     @Method
     public void addRecipe(String name, MCItemStack output, IIngredient inputs, float xp, int cookTime) {
-        SKApi.logger.logInfo("Adding furnace recipe: " + name + " output: " + output + " inputs: " + inputs);
-        recipeListAddition.add(new SmeltingRecipe(new Identifier("sewingkit", name), "", inputs.asIngredient(), ItemStackUtils.getItemStack(output), xp, cookTime));
+        SKApi.logger.logInfo("Adding camo fire recipe: " + name + " output: " + output + " inputs: " + inputs);
+        recipeListAddition.add(new CampfireCookingRecipe(new Identifier("sewingkit", name), "", inputs.asIngredient(), ItemStackUtils.getItemStack(output), xp, cookTime));
     }
     
     @Method
@@ -38,6 +38,6 @@ public class FurnaceManager extends RecipeManagerBase implements ZenCodeType {
     
     @Override
     public RecipeType getType() {
-        return RecipeType.SMELTING;
+        return RecipeType.CAMPFIRE_COOKING;
     }
 }
