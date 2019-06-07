@@ -6,7 +6,6 @@ import com.blamejared.sewingkit.api.item.MCItemStack;
 import com.blamejared.sewingkit.api.utils.ItemStackUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.crafting.*;
 import net.minecraft.util.*;
 import org.openzen.zencode.java.ZenCodeType;
 
