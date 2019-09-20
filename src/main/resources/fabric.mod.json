@@ -1,19 +1,35 @@
 {
-  "schemaVersion": 1,
-  "environment": "*",
-  "id": "sewingkit",
-  "name": "Sewing Kit",
-  "version": "1.0.2",
-  "side": "universal",
-  "depends": {
-    "fabric": "*"
-  },
-  "entrypoints": {
-    "main": [
-      "com.blamejared.sewingkit.SewingKit"
+    "schemaVersion": 1,
+    "id": "sewingkit",
+    "name": "Sewing Kit",
+    "version": "${version}",
+    "depends": {
+        "fabric": ">=0.3.2-"
+    },
+    "contact": {
+        "issues": "https://github.com/UpcraftLP/sewingkit/issues",
+        "sources": "https://github.com/UpcraftLP/sewingkit"
+    },
+    "authors": [
+        {
+            "name": "jaredlll08",
+            "contact": {
+                "homepage": "https://blamejared.com"
+            }
+        },
+        {
+            "name": "UpcraftLP",
+            "contact": {
+                "homepage": "https://twitter.com/UpcraftLP"
+            }
+        }
+    ],
+    "entrypoints": {
+        "main": [
+            "com.blamejared.sewingkit.SewingKit"
+        ]
+    },
+    "mixins": [
+        "mixins.sewingkit.json"
     ]
-  },
-  "mixins": [
-      "mixins.sewingkit.json"
-  ]
 }
