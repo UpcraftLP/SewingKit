@@ -20,18 +20,18 @@ public class MCItemStack implements ZenCodeType, IIngredient {
     
     @Getter("name")
     public String getName() {
-        return stack.getDisplayName().getFormattedText();
+        return stack.getName().asFormattedString();
     }
     
     @Getter("amount")
     public int getAmount() {
-        return stack.getAmount();
+        return stack.getCount();
     }
     
     @Operator(OperatorType.MUL)
     public MCItemStack setAmount(int amount) {
         ItemStack copy = stack.copy();
-        copy.setAmount(amount);
+        copy.setCount(amount);
         return new MCItemStack(copy);
     }
     
@@ -48,7 +48,7 @@ public class MCItemStack implements ZenCodeType, IIngredient {
     
     @Getter("tag")
     public String getTag() {
-        return quoteAndEscape(stack.getTag().toString());
+        return quoteAndEscape(stack.hasTag() ? stack.getTag().toText().asFormattedString() : "");
     }
     
     @Getter("commandString")

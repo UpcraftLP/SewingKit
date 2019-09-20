@@ -39,8 +39,8 @@ public class SKApi implements ZenCodeGlobals {
     }
     
     
-    public static List<Class> locate(String path, boolean arrays) {
-        List<Class> classes = new ArrayList<>();
+    public static List<Class<?>> locate(String path, boolean arrays) {
+        List<Class<?>> classes = new ArrayList<>();
         try {
             for(ClassPath.ClassInfo info : ClassPath.from(SKApi.class.getClassLoader()).getAllClasses()) {
                 if(!info.getPackageName().startsWith(path)) {

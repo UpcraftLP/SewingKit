@@ -1,36 +1,51 @@
 package com.blamejared.sewingkit.mixin;
 
 import com.blamejared.sewingkit.api.SKApi;
-import com.blamejared.sewingkit.api.item.*;
+import com.blamejared.sewingkit.api.item.ItemManager;
+import com.blamejared.sewingkit.api.item.MCItemStack;
 import com.blamejared.sewingkit.api.recipes.RecipeManagerBase;
 import com.blamejared.sewingkit.api.tag.TagManager;
-import net.minecraft.recipe.*;
+import com.google.gson.JsonObject;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeManager;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
-import org.openzen.zencode.java.*;
-import org.openzen.zencode.shared.*;
-import org.openzen.zenscript.codemodel.*;
-import org.openzen.zenscript.codemodel.member.*;
+import net.minecraft.util.profiler.Profiler;
+import org.openzen.zencode.java.JavaNativeModule;
+import org.openzen.zencode.java.ScriptingEngine;
+import org.openzen.zencode.java.ZenCodeType;
+import org.openzen.zencode.shared.FileSourceFile;
+import org.openzen.zencode.shared.SourceFile;
+import org.openzen.zenscript.codemodel.FunctionParameter;
+import org.openzen.zenscript.codemodel.SemanticModule;
+import org.openzen.zenscript.codemodel.member.DefinitionMember;
+import org.openzen.zenscript.codemodel.member.MethodMember;
 import org.openzen.zenscript.codemodel.member.ref.FunctionalMemberRef;
-import org.openzen.zenscript.parser.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import org.openzen.zenscript.parser.PrefixedBracketParser;
+import org.openzen.zenscript.parser.SimpleBracketParser;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.io.File;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Mixin(RecipeManager.class)
 public abstract class RecipeMixin {
     
     @Shadow
-    @Final
     private Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipeMap;
     
-    @Inject(at = @At("TAIL"), method = "apply")
-    private void run(ResourceManager resourceManager_1, CallbackInfo info) {
+    @Inject(at = @At("TAIL"), method = "method_20705")
+    private void run(Map<Identifier, JsonObject> map_1, ResourceManager resourceManager_1, Profiler profiler_1, CallbackInfo ci) {
         System.out.println(">>> start");
-        List<Class> list = SKApi.locate("com.blamejared.sewingkit.api", false);
+        List<Class<?>> list = SKApi.locate("com.blamejared.sewingkit.api", false);
         
         ItemManager.rebuild();
         TagManager.rebuild();
@@ -97,7 +112,7 @@ public abstract class RecipeMixin {
         }
         
         
-        for(RecipeManagerBase base : RecipeManagerBase.managers) {
+        for(RecipeManagerBase<?> base : RecipeManagerBase.managers) {
             for(Identifier identifier : base.recipeListRemoval) {
                 recipeMap.get(base.getType()).remove(identifier);
             }
